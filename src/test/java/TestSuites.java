@@ -1,11 +1,11 @@
-import login.SuccessLogin;
+import worklog.WorklogFilling;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-        SuccessLogin.class,
+        WorklogFilling.class,
 })
 
 public class TestSuites {

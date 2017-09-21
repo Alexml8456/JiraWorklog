@@ -22,6 +22,8 @@ public class BaseTest {
     private static final String TEST_BROWSER = "test.browser";
     private static final String BROWSER_SIZE = "browser.size";
     private static final String TEST_TIMEOUT = "test.timeout";
+    private static final String START_TIME = "start.time";
+    private static final String END_TIME = "end.time";
 
     private static Properties config;
 
@@ -53,6 +55,14 @@ public class BaseTest {
 
     public static String getPassword() {
         return config.getProperty(PASSWORD);
+    }
+
+    public static String getStartTime() {
+        return config.getProperty(START_TIME);
+    }
+
+    public static String getEndTime() {
+        return config.getProperty(END_TIME);
     }
 
 
