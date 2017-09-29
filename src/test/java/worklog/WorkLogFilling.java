@@ -7,10 +7,9 @@ import org.junit.AfterClass;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.sleep;
 import static config.Gherkin.*;
 
-public class WorklogFilling extends BaseTest {
+public class WorkLogFilling extends BaseTest {
     static LoginPage loginPage = new LoginPage();
     static Dashboard dashBoard = new Dashboard();
     static WorkLogPage workLogPage = new WorkLogPage();
@@ -21,7 +20,7 @@ public class WorklogFilling extends BaseTest {
     }
 
     @Test
-    public void worklogFilling() {
+    public void workLogFilling() {
         WHEN("User login");
         loginPage.login(getUserName(), getPassword());
         dashBoard.openWorkLog();
@@ -29,11 +28,11 @@ public class WorklogFilling extends BaseTest {
             if (!workLogPage.getColumnDates().get(i).getText().contains("Sat") && !workLogPage.getColumnDates().get(i).getText().contains("Sun")) {
                 if (workLogPage.getWorkLogRows().get(i).$$("td").get(2).getText().isEmpty()) {
                     workLogPage.getWorkLogButtons().get(i).click();
-                    workLogPage.getStartTime().setValue(getStartTime());
-                    workLogPage.getEndTime().setValue(getEndTime());
-                    workLogPage.getProject().selectOptionContainingText("Markets BackOffice");
-                    workLogPage.getGroup().selectOptionContainingText("B2B");
-                    workLogPage.getSaveButton().click();
+                    workLogPage.workLogDialog.getStartTime().setValue(getStartTime());
+                    workLogPage.workLogDialog.getEndTime().setValue(getEndTime());
+                    workLogPage.workLogDialog.getProject().selectOptionContainingText(getProject());
+                    workLogPage.workLogDialog.getGroup().selectOptionContainingText(getGroup());
+                    workLogPage.workLogDialog.clickSaveButton();
                     workLogPage.getWorkLogRows().get(i).$$("td").get(2).waitUntil(text(getStartTime()), 5000);
                 }
             }

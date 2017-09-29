@@ -24,6 +24,9 @@ public class BaseTest {
     private static final String TEST_TIMEOUT = "test.timeout";
     private static final String START_TIME = "start.time";
     private static final String END_TIME = "end.time";
+    private static final String PROJECT = "project";
+    private static final String GROUP = "group";
+
 
     private static Properties config;
 
@@ -65,6 +68,13 @@ public class BaseTest {
         return config.getProperty(END_TIME);
     }
 
+    public static String getProject() {
+        return config.getProperty(PROJECT);
+    }
+
+    public static String getGroup() {
+        return config.getProperty(GROUP);
+    }
 
     @After
     public void tearDown() throws IOException {
