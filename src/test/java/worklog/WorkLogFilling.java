@@ -1,7 +1,7 @@
 package worklog;
 
 import configs.BaseTest;
-import dashboard.Dashboard;
+import header.Header;
 import login.LoginPage;
 import org.junit.AfterClass;
 import org.junit.Test;
@@ -11,19 +11,19 @@ import static config.Gherkin.*;
 
 public class WorkLogFilling extends BaseTest {
     static LoginPage loginPage = new LoginPage();
-    static Dashboard dashBoard = new Dashboard();
+    static Header header = new Header();
     static WorkLogPage workLogPage = new WorkLogPage();
 
     @AfterClass
     public static void logOut() {
-        dashBoard.clickLogOut();
+        header.clickLogOut();
     }
 
     @Test
     public void workLogFilling() {
         WHEN("User login");
         loginPage.login(getUserName(), getPassword());
-        dashBoard.openWorkLog();
+        header.openWorkLog();
         for (int i = 0; i < workLogPage.getWorkLogRows().size(); i++) {
             if (!workLogPage.getColumnDates().get(i).getText().contains("Sat") && !workLogPage.getColumnDates().get(i).getText().contains("Sun")) {
                 if (workLogPage.getWorkLogRows().get(i).$$("td").get(2).getText().isEmpty()) {
@@ -40,6 +40,6 @@ public class WorkLogFilling extends BaseTest {
 
 
         EXPECT("Logout link and welcome message should be present");
-        dashBoard.avatar().shouldBe(visible);
+        header.avatar().shouldBe(visible);
     }
 }
