@@ -6,8 +6,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-        //WorkLogFilling.class,
-        SuccessLogin.class
+        WorkLogFilling.class,
+        //SuccessLogin.class
 })
 
 public class TestSuites {

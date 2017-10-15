@@ -9,12 +9,12 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class WorkLogPage {
-    private SelenideElement workLogReport = $(byId("worklog-report"));
     private SelenideElement tBody = $("tbody");
-    private ElementsCollection workLogRows = this.workLogReport.$$("tbody tr");
+    private ElementsCollection workLogRows = this.tBody.$$("tr");
     private ElementsCollection columnDates = this.tBody.$$(byClassName("column_date"));
     private ElementsCollection workLogButtons = this.tBody.$$(byAttribute("class", "aui-icon aui-icon-small aui-iconfont-add"));
-    private SelenideElement stTime = $$("td").get(2);
+    private SelenideElement date = $$("td").get(0);
+    private SelenideElement startTime = $$("td").get(2);
 
     public WorkLogDialog workLogDialog = new WorkLogDialog();
 
@@ -26,12 +26,12 @@ public class WorkLogPage {
         return columnDates;
     }
 
-
     public ElementsCollection getWorkLogButtons() {
         return workLogButtons;
     }
 
-    public SelenideElement getStTime() {
-        return stTime;
+    public SelenideElement getStartTime() {
+        return startTime;
     }
+
 }

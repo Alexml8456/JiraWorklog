@@ -1,6 +1,7 @@
 package header;
 
 import com.codeborne.selenide.SelenideElement;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selectors.byId;
@@ -15,11 +16,13 @@ public class Header {
     private SelenideElement logOut = this.optionContent.$(byId("log_out"));
     private SelenideElement workLogs = this.optionContent.$(byId("worklog"));
 
+    @Step
     public void clickLogOut(){
         this.headerDetails.click();
         this.logOut.click();
     }
 
+    @Step
     public void openWorkLog(){
         this.headerDetails.click();
         this.workLogs.click();
