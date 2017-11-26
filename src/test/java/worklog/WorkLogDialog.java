@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.$;
+import static configs.BaseTest.*;
 
 public class WorkLogDialog {
     private SelenideElement createDialog = $(byId("create-worklog"));
@@ -17,27 +18,27 @@ public class WorkLogDialog {
     private SelenideElement cancelButton = this.footer.$(byId("cancel"));
     private SelenideElement saveButton = this.footer.$(byId("submit"));
 
-    public SelenideElement getStartTime() {
-        return startTime;
-    }
-
-    public SelenideElement getEndTime() {
-        return endTime;
-    }
-
-    public SelenideElement getProject() {
-        return project;
-    }
-
-    public SelenideElement getGroup() {
-        return group;
-    }
-
     public void clickSaveButton() {
         saveButton.click();
     }
 
     public void clickCancelButton() {
         cancelButton.click();
+    }
+
+    public void setStartTime() {
+        this.startTime.setValue(getStartTime());
+    }
+
+    public void setEndTime() {
+        this.endTime.setValue(getEndTime());
+    }
+
+    public void selectProject() {
+        this.project.selectOptionContainingText(getProject());
+    }
+
+    public void selectGroup() {
+        this.group.selectOptionContainingText(getGroup());
     }
 }

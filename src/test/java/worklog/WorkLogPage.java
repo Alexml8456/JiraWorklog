@@ -4,7 +4,8 @@ package worklog;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byAttribute;
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -33,5 +34,12 @@ public class WorkLogPage {
     public SelenideElement getStartTime() {
         return startTime;
     }
+
+    public void filling (){
+        this.workLogRows.forEach(selenideElement -> {
+            selenideElement.$$("td").get(2).click();
+        });
+    }
+
 
 }

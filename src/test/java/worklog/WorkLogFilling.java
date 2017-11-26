@@ -1,16 +1,15 @@
 package worklog;
 
-import com.codeborne.selenide.SelenideElement;
 import configs.BaseTest;
 import header.Header;
 import login.LoginPage;
 import org.junit.AfterClass;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$$;
-import static config.Gherkin.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static config.Gherkin.EXPECT;
+import static config.Gherkin.WHEN;
 
 public class WorkLogFilling extends BaseTest {
     static LoginPage loginPage = new LoginPage();
@@ -28,37 +27,18 @@ public class WorkLogFilling extends BaseTest {
         loginPage.login(getUserName(), getPassword());
         header.openWorkLog();
 
-
-        workLogPage.getWorkLogRows().forEach(element->{
+        workLogPage.getWorkLogRows().forEach(element -> {
             boolean condition = !(element.getText().contains("Sat") || element.getText().contains("Sun"));
-            if (condition){
-                element.find((By) $$("td").get(2));
-//                if (element.$$("td").get(2).getText().isEmpty()) {
-//                    workLogPage.getWorkLogButtons().get(i).click();
-//                    workLogPage.workLogDialog.getStartTime().setValue(getStartTime());
-//                    workLogPage.workLogDialog.getEndTime().setValue(getEndTime());
-//                    workLogPage.workLogDialog.getProject().selectOptionContainingText(getProject());
-//                    workLogPage.workLogDialog.getGroup().selectOptionContainingText(getGroup());
-//                    workLogPage.workLogDialog.clickSaveButton();
-//                    element.$$("td").get(2).waitUntil(text(getStartTime()), 5000);
-//                }
+            if (condition && element.$$("td").get(2).getText().isEmpty()) {
+                element.$$("td").get(1).click();
+                workLogPage.workLogDialog.setStartTime();
+                workLogPage.workLogDialog.setEndTime();
+                workLogPage.workLogDialog.selectProject();
+                workLogPage.workLogDialog.selectGroup();
+                workLogPage.workLogDialog.clickSaveButton();
+                element.$$("td").get(2).waitUntil(text(getStartTime()), 5000);
             }
         });
-        
-//        for (int i = 0; i < workLogPage.getWorkLogRows().size(); i++) {
-//            if (!workLogPage.getColumnDates().get(i).getText().contains("Sat") && !workLogPage.getColumnDates().get(i).getText().contains("Sun")) {
-//                if (workLogPage.getWorkLogRows().get(i).$$("td").get(2).getText().isEmpty()) {
-//                    workLogPage.getWorkLogButtons().get(i).click();
-//                    workLogPage.workLogDialog.getStartTime().setValue(getStartTime());
-//                    workLogPage.workLogDialog.getEndTime().setValue(getEndTime());
-//                    workLogPage.workLogDialog.getProject().selectOptionContainingText(getProject());
-//                    workLogPage.workLogDialog.getGroup().selectOptionContainingText(getGroup());
-//                    workLogPage.workLogDialog.clickSaveButton();
-//                    workLogPage.getWorkLogRows().get(i).$$("td").get(2).waitUntil(text(getStartTime()), 5000);
-//                }
-//            }
-//        }
-
 
         EXPECT("Logout link and welcome message should be present");
         header.avatar().shouldBe(visible);
