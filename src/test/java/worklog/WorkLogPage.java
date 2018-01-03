@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -16,6 +17,8 @@ public class WorkLogPage {
     private ElementsCollection workLogButtons = this.tBody.$$(byAttribute("class", "aui-icon aui-icon-small aui-iconfont-add"));
     private SelenideElement date = $$("td").get(0);
     private SelenideElement startTime = $$("td").get(2);
+    private SelenideElement worklogHeader = $(byId("worklog-header"));
+    private SelenideElement period = this.worklogHeader.$(byId("period"));
 
     public WorkLogDialog workLogDialog = new WorkLogDialog();
 
@@ -41,5 +44,8 @@ public class WorkLogPage {
         });
     }
 
+    public void setPeriod(String period) {
+        this.period.selectOptionContainingText(period);
+    }
 
 }
