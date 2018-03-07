@@ -8,14 +8,20 @@
     <artifactId>JiraWorklog</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>jar</packaging>
+
     <properties>
-        <selenide.version>4.6</selenide.version>
-        <allure.version>1.5.2</allure.version>
-        <allure.plugin.version>2.5</allure.plugin.version>
-        <aspectj.version>1.8.10</aspectj.version>
-        <maven.surefire.plugin>2.20</maven.surefire.plugin>
+        <selenide.version>4.10.01</selenide.version>
+        <selenium.version>3.8.1</selenium.version>
+        <webdrivermanager.version>2.1.0</webdrivermanager.version>
+        <guava.version>23.6-jre</guava.version>
+        <allure.version>1.5.4</allure.version>
+        <allure.plugin.version>2.6</allure.plugin.version>
+        <aspectj.version>1.8.13</aspectj.version>
+        <maven.surefire.plugin>2.20.1</maven.surefire.plugin>
+        <maven.jar.plagin>3.0.2</maven.jar.plagin>
+        <maven.dependency.plugin>3.0.2</maven.dependency.plugin>
         <junit.version>4.12</junit.version>
-        <chome.driver.version>3.0.1</chome.driver.version>
         <maven-site-plugin>3.6</maven-site-plugin>
         <maven-compiler-plugin>3.6.1</maven-compiler-plugin>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -24,19 +30,24 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>${chome.driver.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
@@ -58,7 +69,43 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
+
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.crypto.e2e.Main</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.plagin}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.crypto.e2e.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -142,6 +189,5 @@
         </profile>
 
     </profiles>
-
 
 </project>

@@ -26,7 +26,7 @@ public class WorkLogFilling extends BaseTest {
         WHEN("User login");
         loginPage.login(getUserName(), getPassword());
         header.openWorkLog();
-        workLogPage.setPeriod("December");
+        //workLogPage.setPeriod("December");
 
         workLogPage.getWorkLogRows().forEach(element -> {
             boolean condition = !(element.getText().contains("Sat") || element.getText().contains("Sun"));
