@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 public class LoginPage {
-    private SelenideElement frame = $(byId("gadget-0"));
+    private SelenideElement frame = $(byId("gadget-0-chrome"));
     private SelenideElement loginForm = $(byId("loginform"));
     private SelenideElement userName = this.loginForm.$(byId("login-form-username"));
     private SelenideElement password = this.loginForm.$(byId("login-form-password"));
@@ -31,7 +31,7 @@ public class LoginPage {
 
     @Step
     public void login(String user, String password) {
-        switchTo().frame(this.frame);
+        //switchTo().frame(this.frame);
         this.inputUserName(user);
         this.inputPassword(password);
         this.clickLogInButton();

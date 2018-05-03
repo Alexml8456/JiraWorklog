@@ -11,10 +11,10 @@
     <packaging>jar</packaging>
 
     <properties>
-        <selenide.version>4.10.01</selenide.version>
+        <selenide.version>4.11.2</selenide.version>
         <selenium.version>3.8.1</selenium.version>
         <webdrivermanager.version>2.1.0</webdrivermanager.version>
-        <guava.version>23.6-jre</guava.version>
+        <guava.version>25.0-jre</guava.version>
         <allure.version>1.5.4</allure.version>
         <allure.plugin.version>2.6</allure.plugin.version>
         <aspectj.version>1.8.13</aspectj.version>
